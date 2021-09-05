@@ -33,7 +33,8 @@ maven_install(
         "org.slf4j:slf4j-api:1.7.30",
         "io.micronaut.test:micronaut-test-junit5:%s" % MICRONAUT_TEST_VERSION,
         "org.junit.jupiter:junit-jupiter-api:%s" % JUNIT_VERSION,
-        "org.junit.jupiter:junit-jupiter-engine:%s" % JUNIT_VERSION
+        "org.junit.jupiter:junit-jupiter-engine:%s" % JUNIT_VERSION,
+        "org.junit.platform:junit-platform-console:1.7.2"
     ],
     repositories = [
         "https://repo.maven.apache.org/maven2"

@@ -86,12 +86,3 @@ java_binary(
     main_class = "com.example.Application",
     runtime_deps = [":backend_libs"]
 )
-
-java_library(
-    name = "backend_test_deps",
-    exports = [
-        "@maven//:io_micronaut_test_micronaut_test_junit5",
-        "@maven//:org_junit_jupiter_junit_jupiter_api",
-        "@maven//:org_junit_jupiter_junit_jupiter_engine",
-    ],
-)
