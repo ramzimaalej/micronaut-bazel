@@ -1,0 +1,45 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+RULES_JVM_EXTERNAL_TAG = "4.0"
+RULES_JVM_EXTERNAL_SHA = "31701ad93dbfe544d597dbe62c9a1fdd76d81d8a9150c2bf1ecf928ecdf97169"
+MICRONAUT_VERSION = "2.5.7"
+MICRONAUT_TEST_VERSION = "2.3.7"
+JUNIT_VERSION = "5.7.1"
+LOGBACK_VERSION = "1.2.3"
+
+http_archive(
+    name = "rules_jvm_external",
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+)
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+maven_install(
+    artifacts = [
+        "io.micronaut:micronaut-aop:%s" % MICRONAUT_VERSION,
+        "io.micronaut:micronaut-inject:%s" % MICRONAUT_VERSION,
+        "io.micronaut:micronaut-inject-java:%s" % MICRONAUT_VERSION,
+        "io.micronaut:micronaut-validation:%s" % MICRONAUT_VERSION,
+        "io.micronaut:micronaut-http-client:%s" % MICRONAUT_VERSION,
+        "io.micronaut:micronaut-http-server-netty:%s" % MICRONAUT_VERSION,
+        "io.micronaut:micronaut-runtime:%s" % MICRONAUT_VERSION,
+        "io.micronaut:micronaut-context:%s" % MICRONAUT_VERSION,
+        "io.micronaut:micronaut-core:%s" % MICRONAUT_VERSION,
+        "ch.qos.logback:logback-core:%s" % LOGBACK_VERSION,
+        "ch.qos.logback:logback-classic:%s" % LOGBACK_VERSION,
+        "javax.annotation:javax.annotation-api:1.3.2",
+        "org.slf4j:slf4j-api:1.7.30",
+        "io.micronaut.test:micronaut-test-junit5:%s" % MICRONAUT_TEST_VERSION,
+        "org.junit.jupiter:junit-jupiter-api:%s" % JUNIT_VERSION,
+        "org.junit.jupiter:junit-jupiter-engine:%s" % JUNIT_VERSION
+    ],
+    repositories = [
+        "https://repo.maven.apache.org/maven2"
+    ],
+    maven_install_json = "//:maven_install.json"
+)
+
+load("@maven//:defs.bzl", "pinned_maven_install")
+pinned_maven_install()
