@@ -16,3 +16,4 @@ out/
 .classpath
 .factorypath
 
+node_modules/
